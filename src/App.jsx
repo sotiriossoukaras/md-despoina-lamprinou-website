@@ -1,7 +1,12 @@
 import "./index.css";
+import Νavbar from "./components/Νavbar";
 
 function App() {
-  return <h1>Initial Push</h1>;
+  return (
+    <div>
+      <Νavbar></Νavbar>
+    </div>
+  );
 }
 
 export default App;
