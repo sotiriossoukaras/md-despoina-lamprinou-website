@@ -3,13 +3,20 @@ import {
   DisclosureButton,
   DisclosurePanel,
 } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { 
+  Bars3Icon, 
+  XMarkIcon,
+  PhoneIcon,
+  EnvelopeIcon,
+  ClockIcon 
+} from "@heroicons/react/24/outline";
+import logo from "../assets/md-despoina-lamprinou-logo.jpg";
 
 const navigation = [
-  { name: "Dashboard", href: "#", current: false },
-  { name: "Team", href: "#", current: false },
-  { name: "Projects", href: "#", current: false },
-  { name: "Calendar", href: "#", current: false },
+  { name: "ΑΡΧΙΚΗ", href: "#", current: true },
+  { name: "ΤΟ ΙΑΤΡΕΙΟ", href: "#", current: false },
+  { name: "ΥΠΗΡΕΣΙΕΣ", href: "#", current: false },
+  { name: "ΕΠΙΚΟΙΝΩΝΙΑ", href: "#", current: false },
 ];
 
 function classNames(...classes) {
@@ -19,71 +26,79 @@ function classNames(...classes) {
 export default function Navbar() {
   return (
     <>
-      <Disclosure
-        as="nav"
-        className="relative bg-gray-800/50 after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-white/10"
-      >
-        <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-          <div className="relative flex h-16 items-center justify-between">
-            <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-              {/* Mobile menu button*/}
-              <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-white/5 hover:text-white focus:outline-2 focus:-outline-offset-1 focus:outline-indigo-500">
-                <span className="absolute -inset-0.5" />
-                <span className="sr-only">Open main menu</span>
-                <Bars3Icon
-                  aria-hidden="true"
-                  className="block size-6 group-data-open:hidden"
-                />
-                <XMarkIcon
-                  aria-hidden="true"
-                  className="hidden size-6 group-data-open:block"
-                />
-              </DisclosureButton>
+      <div className="bg-[#214d72] text-white py-2.5 px-4 shadow-sm relative z-[60]">
+        <div className="mx-auto max-w-7xl flex flex-col md:flex-row justify-between items-center">
+          <div className="text-[10px] md:text-[11px] font-bold tracking-widest uppercase">
+            ΔΕΣΠΟΙΝΑ ΛΑΜΠΡΙΝΟΥ | ΓΕΝΙΚΗ ΙΑΤΡΟΣ | ΛΟΥΤΡΑ ΑΙΔΗΨΟΥ
+          </div>
+          <div className="flex items-center gap-6 text-[10px] md:text-[11px] font-bold mt-2 md:mt-0">
+            <a href="tel:2226023899" className="flex items-center gap-1.5 hover:text-[#77a9c1] transition-colors">
+              <PhoneIcon className="size-3.5" /> 2226 023899
+            </a>
+            <a href="mailto:info@example.gr" className="flex items-center gap-1.5 hover:text-[#77a9c1] transition-colors">
+              <EnvelopeIcon className="size-3.5" /> EMAIL
+            </a>
+            <span className="hidden md:block w-px h-4 bg-white/20"></span>
+            <div className="flex items-center gap-1.5 opacity-90 font-medium">
+              <ClockIcon className="size-3.5" /> ΔΕΥΤ - ΠΑΡ: 09:00 - 14:00
             </div>
-            <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-              <div className="flex shrink-0 items-center">
-                <img
-                  alt="MD Despoina Lamprinou"
-                  src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
-                  className="h-8 w-auto"
-                />
+          </div>
+        </div>
+      </div>
+
+      <Disclosure as="nav" className="relative bg-white z-50 shadow-md border-b border-gray-100">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="relative flex h-16 md:h-24 items-center">
+            
+            {/* LOGO - Αριστερά */}
+            <a href="#" className="flex shrink-0 items-center transition-transform hover:scale-105">
+              <img
+                alt="MD Despoina Lamprinou"
+                src={logo}
+                className="h-12 md:h-20 w-auto rounded-full shadow-lg"
+              />
+            </a>
+
+            <div className="hidden sm:ml-auto sm:block">
+              <div className="flex space-x-8">
+                {navigation.map((item) => (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    className={classNames(
+                      item.current
+                        ? "text-[#214d72] border-b-2 border-[#214d72]"
+                        : "text-slate-500 hover:text-[#214d72]",
+                      "px-1 py-2 text-sm font-bold tracking-tight transition-all duration-300"
+                    )}
+                  >
+                    {item.name}
+                  </a>
+                ))}
               </div>
-              <div className="hidden sm:ml-6 sm:block">
-                <div className="flex space-x-4">
-                  {navigation.map((item) => (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      aria-current={item.current ? "page" : undefined}
-                      className={classNames(
-                        item.current
-                          ? "bg-gray-950/50 text-white"
-                          : "text-gray-300 hover:bg-white/5 hover:text-white",
-                        "rounded-md px-3 py-2 text-sm font-medium",
-                      )}
-                    >
-                      {item.name}
-                    </a>
-                  ))}
-                </div>
-              </div>
+            </div>
+
+            <div className="absolute inset-y-0 right-0 flex items-center sm:hidden">
+              <DisclosureButton className="group inline-flex items-center justify-center rounded-md p-2 text-[#214d72] hover:bg-slate-50 focus:outline-none">
+                <Bars3Icon className="block size-7 group-data-open:hidden" />
+                <XMarkIcon className="hidden size-7 group-data-open:block" />
+              </DisclosureButton>
             </div>
           </div>
         </div>
 
-        <DisclosurePanel className="sm:hidden">
-          <div className="space-y-1 px-2 pt-2 pb-3">
+        <DisclosurePanel transition className="relative z-40 bg-white shadow-2xl origin-top transition duration-200 ease-out data-closed:-translate-y-4 data-closed:opacity-0 sm:hidden">
+          <div className="space-y-1 px-2 pt-2 pb-6 border-t border-gray-50">
             {navigation.map((item) => (
               <DisclosureButton
                 key={item.name}
                 as="a"
                 href={item.href}
-                aria-current={item.current ? "page" : undefined}
                 className={classNames(
                   item.current
-                    ? "bg-gray-950/50 text-white"
-                    : "text-gray-300 hover:bg-white/5 hover:text-white",
-                  "block rounded-md px-3 py-2 text-base font-medium",
+                    ? "bg-slate-50 text-[#214d72] border-l-4 border-[#214d72]"
+                    : "text-slate-500 hover:text-[#214d72] hover:bg-slate-50",
+                  "block pl-8 pr-4 py-4 text-sm font-semibold tracking-widest uppercase transition-all"
                 )}
               >
                 {item.name}
